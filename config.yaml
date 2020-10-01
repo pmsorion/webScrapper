@@ -3,7 +3,11 @@ news_sites:
     url: http://www.eluniversal.com.mx
     queries:
       homepage_article_links: '.field-content a'
+      article_body: '.field-name-body'
+      article_title: '.panel-content h1'
   forbes:
     url: https://forbes.co
     queries:
       homepage_article_links: '.channel__content a'
+      article_body: ''
+      article_title: ''
