@@ -1,5 +1,9 @@
 news_sites:
   eluniversal:
     url: http://www.eluniversal.com.mx
-  elpais:
-    url: https://elpais.com
+    queries:
+      homepage_article_links: '.field-content a'
+  forbes:
+    url: https://forbes.co
+    queries:
+      homepage_article_links: '.channel__content a'
