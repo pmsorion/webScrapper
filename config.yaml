@@ -4,10 +4,22 @@ news_sites:
     queries:
       homepage_article_links: '.field-content a'
       article_body: '.field-name-body'
-      article_title: '.panel-content h1'
+      article_title: '.ceh-Opinion h2'
   forbes:
     url: https://forbes.co
     queries:
       homepage_article_links: '.channel__content a'
       article_body: ''
       article_title: ''
+  elpais:
+    url: https://elpais.com
+    queries:
+      homepage_article_links: '.articulo-titulo a'
+      article_body: '.articulo-cuerpo'
+      article_title: '.articulo-titulo' 
+  washingtonpost:
+    url: https://www.washingtonpost.com
+    queries:
+      homepage_article_links: '.headline a'
+      article_body: '.topper-headline h1'
+      article_title: 'article.paywall'
