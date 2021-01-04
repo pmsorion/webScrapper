@@ -22,6 +22,9 @@ def main(filename):
     df = _remove_new_lines_from_body(df)
     df['n_tokens_title'] = _data_enrichement(df, 'title')
     df['n_tokens_body'] = _data_enrichement(df, 'body')
+    df = _remove_duplicate_entries(df, 'title')
+    df = _drop_rows_with_missing_data(df)
+    _save_data(df, filename)
 
     return df
 
@@ -89,6 +92,7 @@ def _remove_new_lines_from_body(df):
     return df
 
 def _data_enrichement(df, column_name):
+    logger.info('Enrichment data set')
     return (df
                 .dropna()
                 .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
@@ -97,6 +101,21 @@ def _data_enrichement(df, column_name):
                 .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
                 .apply(lambda valid_word_list: len(valid_word_list))
     )
+
+def _remove_duplicate_entries(df, column_name):
+    logger.info('Remove duplicate entries')
+    df.drop_duplicates(subset=[column_name], keep='first', inplace=True)
+
+    return df
+
+def _drop_rows_with_missing_data(df):
+    logger.info('Dropping rows with value')
+    return df.dropna()
+
+def _save_data(df, filename):
+    clean_filename = 'clean_{}'.format(filename)
+    logger.info('Saving dataframe at location: {}'.format(clean_filename))
+    df.to_csv(clean_filename)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
